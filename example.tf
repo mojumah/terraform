@@ -10,11 +10,36 @@ resource "aws_key_pair" "mo-key" {
 
 }
 
+
 resource "aws_instance" "example" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.mo-key.key_name}"
   tags {
-      Name = "Test instance"
+      Name = "University"
+  }
+#  provisioner "file" {
+#    source      = "script.sh"
+#    destination = "/tmp/script.sh"
+#}
+  provisioner "remote-exec" {
+  connection {
+   type = "ssh"
+   user = "ubuntu"
+   private_key = "${file("mo-key")}"
+   agent = false
+}
+    inline = [
+      "sudo apt-get upgrade -y",
+      "sudo apt-get update -y"
+    ]
+  }
+}
+resource "aws_instance" "example_two" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.small"
+  key_name = "${aws_key_pair.mo-key.key_name}"
+  tags {
+      Name = "Config_Managment"
   }
 }
