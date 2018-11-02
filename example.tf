@@ -16,7 +16,7 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.mo-key.key_name}"
   tags {
-      Name = "University"
+      Name = "teset_target"
   }
 #  provisioner "file" {
 #    source      = "script.sh"
@@ -40,6 +40,6 @@ resource "aws_instance" "example_two" {
   instance_type = "t2.small"
   key_name = "${aws_key_pair.mo-key.key_name}"
   tags {
-      Name = "Config_Managment"
+      Name = "test_controller"
   }
 }
