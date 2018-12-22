@@ -16,7 +16,7 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.mo-key.key_name}"
   tags {
-      Name = "teset_target"
+      Name = "test_target"
   }
 #  provisioner "file" {
 #    source      = "script.sh"
