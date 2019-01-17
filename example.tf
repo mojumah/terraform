@@ -4,9 +4,10 @@ provider "aws" {
   region     = "us-east-1"
 }
 
-resource "aws_key_pair" "mo-key" {
-  key_name   = "mo-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1FGtYkhmvCAkcGoCagZTmblBbgOGCTMDHuCd/rd9MwvCChiaCPnD5lMKxYx8gAJgjwocQeRQTHSm+ohNptZAtoUUjFb8FVczqVKe7tS6XGyLbjrgafKHA14ApyVDfOHl5TOMQQP4EzrgNsLX6ZxlGKJAfl7pwD+DF6p4VIfoXX9kC1OwSby9jP0mYxsSEOfuFHJIxhHqVZDiFXJHVGLBXtJkwSTjGemVJygsnJfZ0xnOF0AOfVekiOeJ01BBsFxiMWndIVMMjE3ZpXfjOqxivLASoy5GnfAwGpZK0MUfh1ZgBxdjxiBYU9xl3EaSnMMYKaq9pKbvt+/hKYiqTHF0x root@ubuntu"
+resource "aws_key_pair" "ssh_private" {
+  key_name   = "ssh_private"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGFdPaRslZb+SiFj0fqaBDNCdceLoXiIVUJYiTax+TZSHx3sYZ+cgCaYyNkLygFhrxVmkYV49UbD5AuH8V78Utdtq+VdI9dYk+GOlrrs2vTSYDcRXsA2pb9mIOgVlSUemv1wqeAGCHvAbPT1q7foni7dZ9/vDUXmXn8B0Q8qru/RPIA0ybI1tDneLvuSjyfTgFwHMjun6jNKa3iNjmkZl8m9imHyUy0Y2XJyYQkQr+j+ML8sJjgs2zcxhXglkLO06fMCsycdZmW68UJ7VKUByxq3jDYSvsaqhEgp7FRVeDQUWCJRLb4C89Rc5xkzm1i4NIgluQWClOngt0COWEw0H5 root@yasmin"
+
 
 }
 
@@ -14,7 +15,8 @@ resource "aws_key_pair" "mo-key" {
 resource "aws_instance" "example" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "${aws_key_pair.mo-key.key_name}"
+  subnet_id = "012fbb93379b42e1d"
+  key_name = "${aws_key_pair.ssh_private.key_name}"
   tags {
       Name = "test_target"
   }
@@ -26,7 +28,7 @@ resource "aws_instance" "example" {
   connection {
    type = "ssh"
    user = "ubuntu"
-   private_key = "${file("mo-key")}"
+   private_key = "${file("private_key")}"
    agent = false
 }
     inline = [
@@ -38,7 +40,7 @@ resource "aws_instance" "example" {
 resource "aws_instance" "example_two" {
   ami           = "ami-2757f631"
   instance_type = "t2.small"
-  key_name = "${aws_key_pair.mo-key.key_name}"
+  key_name = "${aws_key_pair.ssh_private.key_name}"
   tags {
       Name = "test_controller"
   }
