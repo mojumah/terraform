@@ -40,7 +40,7 @@ resource "aws_instance" "example" {
 resource "aws_instance" "example_two" {
   ami           = "ami-2757f631"
   instance_type = "t2.small"
-  key_name = "${aws_key_pair.ssh_private.key_name}"
+  key_name = "${aws_key_pair.ssh_name.key_name}"
   tags {
       Name = "test_controller"
   }
