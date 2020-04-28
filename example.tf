@@ -16,7 +16,7 @@ resource "aws_instance" "example" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
   subnet_id = "012fbb93379b42e1d"
-  key_name = "${aws_key_pair.ssh_private.key_name}"
+  key_name = "${aws_key_pair.ssh_name.key_name}"
   tags {
       Name = "test_target"
   }
@@ -28,7 +28,7 @@ resource "aws_instance" "example" {
   connection {
    type = "ssh"
    user = "ubuntu"
-   private_key = "${file("private_key")}"
+   private_key = "${file("name_key")}"
    agent = false
 }
     inline = [
