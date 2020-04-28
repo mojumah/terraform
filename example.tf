@@ -4,8 +4,8 @@ provider "aws" {
   region     = "us-east-1"
 }
 
-resource "aws_key_pair" "ssh_private" {
-  key_name   = "ssh_private"
+resource "aws_key_pair" "name" {
+  key_name   = "name"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGFdPaRslZb+SiFj0fqaBDNCdceLoXiIVUJYiTax+TZSHx3sYZ+cgCaYyNkLygFhrxVmkYV49UbD5AuH8V78Utdtq+VdI9dYk+GOlrrs2vTSYDcRXsA2pb9mIOgVlSUemv1wqeAGCHvAbPT1q7foni7dZ9/vDUXmXn8B0Q8qru/RPIA0ybI1tDneLvuSjyfTgFwHMjun6jNKa3iNjmkZl8m9imHyUy0Y2XJyYQkQr+j+ML8sJjgs2zcxhXglkLO06fMCsycdZmW68UJ7VKUByxq3jDYSvsaqhEgp7FRVeDQUWCJRLb4C89Rc5xkzm1i4NIgluQWClOngt0COWEw0H5 root@yasmin"
 
 
