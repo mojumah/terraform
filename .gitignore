@@ -1,0 +1,5 @@
+.terraform/plugins/windows_amd64
+lock.json
+terraform-provicer-aws_v2.69.0_x4.exe
+terraform.tfstate
+terraform.tfstate.backup
